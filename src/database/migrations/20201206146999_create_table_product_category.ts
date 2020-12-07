@@ -6,7 +6,12 @@ export async function up(knex: Knex): Promise<void> {
     (table: Knex.CreateTableBuilder) => {
       table.increments("id");
       table.text("name").notNullable();
-      table.integer("companyId").notNullable();
+      table.integer("companyId").unsigned();
+      table
+        .foreign("companyId")
+        .references("companies.id")
+        .onDelete("RESTRICT")
+        .onUpdate("RESTRICT");
       table.timestamps();
     }
   );

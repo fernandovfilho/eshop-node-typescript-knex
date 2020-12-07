@@ -15,13 +15,13 @@ export async function up(knex: Knex): Promise<void> {
       table.string("phone");
       table.string("pushToken");
       table.string("pushPlatform");
-      table.timestamps();
       table.integer("companyId").unsigned();
       table
         .foreign("companyId")
         .references("companies.id")
         .onDelete("RESTRICT")
-        .onUpdate("CASCADE");
+        .onUpdate("RESTRICT");
+      table.timestamps();
     }
   );
 }
